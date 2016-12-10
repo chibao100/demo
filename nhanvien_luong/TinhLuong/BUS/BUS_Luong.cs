@@ -19,12 +19,16 @@ namespace TinhLuong
         public List<SubLuong> ChucVu { get; set; }
         public List<SubLuong> Ngach { get; set; }
 
+        CultureInfo culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+        
+           
         public BUS_Luong()
         {
             Luong = new List<SubLuong>();
             ChucVu = new List<SubLuong>();
             Ngach = new List<SubLuong>();
             db = new salaryContext();
+            culture.NumberFormat.NumberDecimalSeparator = ",";
         }
 
 
@@ -212,54 +216,60 @@ namespace TinhLuong
 
             switch (bac)
             {
-                case "1": heso = heso + float.Parse(t.C_1);
+                case "1": heso = heso + float.Parse(t.C_1, culture);
                     break;
-                case "2": heso = heso + float.Parse(t.C_2);
+                case "2": heso = heso + float.Parse(t.C_2, culture);
                     break;
-                case "3": heso = heso + float.Parse(t.C_3);
+                case "3": heso = heso + float.Parse(t.C_3, culture);
                     break;
-                case "4": heso = heso + float.Parse(t.C_4);
+                case "4": heso = heso + float.Parse(t.C_4, culture);
                     break;
-                case "5": heso = heso + float.Parse(t.C_5);
+                case "5": heso = heso + float.Parse(t.C_5, culture);
                     break;
                 case "6":
                     if (t.C_6.Contains("VK"))
                     {
-                        heso = heso + float.Parse(t.C_5);
-                        phucap = phucap + float.Parse(t.C_6.Remove(0, 3));
+                        heso = heso + float.Parse(t.C_5, culture);
+                        phucap = phucap + float.Parse(t.C_6.Remove(0, 3), culture);
                     }
                     else
                     {
-                        heso = heso + float.Parse(t.C_6);
+                        heso = heso + float.Parse(t.C_6, culture);
                     }
                     break;
                 case "7":
                     if (t.C_7.Contains("VK"))
                     {
-                        heso = heso + float.Parse(t.C_5);
-                        phucap = phucap + float.Parse(t.C_7.Remove(0, 3));
+                        heso = heso + float.Parse(t.C_5, culture);
+                        phucap = phucap + float.Parse(t.C_7.Remove(0, 3), culture);
                     }
                     else
                     {
-                        heso = heso + float.Parse(t.C_7);
+                        heso = heso + float.Parse(t.C_7, culture);
                     }
                     break;
 
                 case "8":
                     if (t.C_7.Contains("VK"))
                     {
-                        heso = heso + float.Parse(t.C_5);
-                        phucap = phucap + float.Parse(t.C_8.Remove(0, 3));
+                        heso = heso + float.Parse(t.C_5, culture);
+                        phucap = phucap + float.Parse(t.C_8.Remove(0, 3), culture);
                     }
                     else
                     {
-                        heso = heso + float.Parse(t.C_7);
-                        phucap = phucap + float.Parse(t.C_8.Remove(0, 3));
+                        heso = heso + float.Parse(t.C_7, culture);
+                        phucap = phucap + float.Parse(t.C_8.Remove(0, 3), culture);
                     }
                     break;
             }
         }
 
-       
+
+        public string HienThiTien(float total_luong2)
+        {
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+            String luongString = double.Parse(total_luong2.ToString()).ToString("#,###", cul.NumberFormat);
+            return luongString + "  VNĐ";
+        }
     }
 }

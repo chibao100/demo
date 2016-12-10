@@ -69,7 +69,7 @@ namespace TinhLuong
                 dataGridView1.Rows.Add(Luong[i].heso, Luong[i].phucap, Luong[i].count, luong);
             }
             float total_luong2 = total_luong - (total_luong * 0.07f);
-            textBox3.Text = total_luong2.ToString("c",CultureInfo.CreateSpecificCulture("vi-VN"));
+            textBox3.Text = Mybus.HienThiTien(total_luong2);
              
         }
 
