@@ -66,7 +66,8 @@ namespace TinhLuong
             {
                 float luong = ((Luong[i].heso * 720000) + (Luong[i].phucap * Luong[i].heso * 720000)) * Luong[i].count / 30;
                 total_luong = total_luong + luong;
-                dataGridView1.Rows.Add(Luong[i].heso, Luong[i].phucap, Luong[i].count, luong);
+                String luongString = Mybus.HienThiTien(total_luong);
+                dataGridView1.Rows.Add(Luong[i].heso, Luong[i].phucap, Luong[i].count, luongString);
             }
             float total_luong2 = total_luong - (total_luong * 0.07f);
             textBox3.Text = Mybus.HienThiTien(total_luong2);
